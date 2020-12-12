@@ -13,7 +13,7 @@ SELECT * FROM jobs.job_executions WHERE lifecycle = 'Failed' ORDER BY start_time
 
 The email functionality can be leveraged through any Simple Mail Transfer Protocol server. The proposed script is using smtp.mail.yahoo.com on port 587. 
 
-## Running automation 
+## How to run and automate the alerts
 
 ### OPTION#1 
 Run the script on schedule in background on client machine
@@ -87,6 +87,8 @@ Connect-AzAccount `
 ```
 
 * Schedule task
+
+Note: Script execution can be monitored in the Azure portal and alerts can be set for any script execution failure.
 
 For a detailed overview of script functionalities, please check [this blogpost](https://techcommunity.microsoft.com/t5/azure-database-support-blog/automate-and-send-alerts-for-elastic-jobs-failures/ba-p/1981457).
 
