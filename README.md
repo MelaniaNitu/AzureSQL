@@ -18,6 +18,22 @@ The email functionality can be leveraged through any Simple Mail Transfer Protoc
 ### OPTION#1 
 Run the script on schedule in background on client machine
 
+In order to run it you need to:
+
+* Open Windows PowerShell ISE in Administrator mode
+
+* Open a New Script window
+
+* Paste the content in script window
+
+* Set the required parameters in the script: Insert Credentials, SQL Server Details & SMTP server Details
+
+* Run it
+
+* If failed jobs are found, an alert email will be triggered and the log file containing details on the failed jobs will be attached to the email and either saved locally or sent to a storage account. The result of the script can be followed in the output window. 
+
+* To run the script in background on a schedule, you can use the following commands:
+
 ```
 ##  =========================================================================
 ##                Schedule Commands for Client Machines 
