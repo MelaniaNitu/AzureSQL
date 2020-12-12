@@ -15,6 +15,22 @@ The email functionality can be leveraged through any Simple Mail Transfer Protoc
 
 ## How to run and automate the alerts
 
+For any of the below options, you have to set the required parameters in the script: Insert SQL Server Details, Credentials & SMTP server details:
+```
+$server = '.database.windows.net' # Set the name of the server
+$jobDB = ''   # Set the name of the job database you wish to test
+$user = '' # Set the login username you wish to use
+$passw = '' # Set the login password you wish to use
+$FromEmail = 'xxxxxxxxxxxx@yahoo.com' # "from" field's account must match the smtp server domain 
+$FromEmailPassw = '' # use app/server access token - it works with account passw
+$ToEmail = 'xxxxxxxxxxxx@yyyyy.com'
+$SMTPServer = "smtp.mail.yahoo.com" #insert SMTP server
+$SMTPPort = "587" # or port 465
+$StorageAccountName = ''
+$StorageContainerName = ''
+```
+
+
 ### OPTION#1 
 Run the script on schedule in background on client machine
 
@@ -25,8 +41,6 @@ In order to run it you need to:
 * Open a New Script window
 
 * Paste the content in script window
-
-* Set the required parameters in the script: Insert Credentials, SQL Server Details & SMTP server Details
 
 * Run it
 
@@ -63,7 +77,7 @@ Run the script from Azure Runbook
 * Create a new Automation Account as described [here](https://docs.microsoft.com/en-us/azure/automation/automation-create-standalone-account#create-a-new-automation-account-in-the-azure-portal) and make sure you choose "YES" for option "Create Azure Run As Account".
 
 * Import the following Azure Modules by browsing the gallery: Az.Accounts (≥ 2.2.2), Az.Storage, Az.Automation
-             
+
 * Create a runbook to run the script and make sure you choose Powershell runbook type.
 
 * Add the following login section when connecting from a Runbook        
