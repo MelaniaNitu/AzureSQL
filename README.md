@@ -1,7 +1,7 @@
-# Monitoring Azure SQL Elastic Jobs Status and Alerts Generation
+# Automate and Send Alerts for Elastic Jobs Failures
 
 
-Alerts can be sent for any particular state of an elastic job. This script address the case of 'Failed' jobs, however the solution can be easily extended to other scenarios. The script can be executed on client machines in background on a schedule or in Azure Automation Runbook. If failed jobs are identified, email notifications are sent, with an attachment of a log file containing only the failed jobs. 
+Alerts can be sent for any particular state of an elastic job. This script addresses the case of 'Failed' jobs, however the solution can be easily extended to other scenarios. The script can be executed on client machines in background on a schedule or in Azure Automation Runbook. If failed jobs are identified, email notifications are sent, with an attachment of a log file containing only the failed jobs. 
 
 This repository contains a PowerShell script that filters job executions based on their status and sends the output to a log file, that is further sent as an attachment in a notification email and in the same time the log file is stored in an Azure Storage Account for further reference. 
 
@@ -13,9 +13,9 @@ SELECT * FROM jobs.job_executions WHERE lifecycle = 'Failed' ORDER BY start_time
 
 The email functionality can be leveraged through any Simple Mail Transfer Protocol server. The proposed script is using smtp.mail.yahoo.com on port 587. 
 
-Automation options
+# Running automation 
 
-OPTION#1 
+## OPTION#1 
 Run the script on schedule in background on client machine
 
 ```
@@ -41,19 +41,16 @@ Register-ScheduledJob -Name $jobName -FilePath $script -Trigger (New-JobTrigger 
 Unregister-ScheduledJob $jobName
 ```
 
-OPTION#2
+## OPTION#2
 Run the script from Azure Runbook
 
-Create a new Automation Account as described here and make sure you choose "YES" for option "Create Azure Run As Account".
+* Create a new Automation Account as described [here](https://docs.microsoft.com/en-us/azure/automation/automation-create-standalone-account#create-a-new-automation-account-in-the-azure-portal) and make sure you choose "YES" for option "Create Azure Run As Account".
 
-Import the following Azure Modules by browsing the gallery: 
-        Az.Accounts (≥ 2.2.2)
-        Az.Storage
-        Az.Automation
+* Import the following Azure Modules by browsing the gallery: Az.Accounts (≥ 2.2.2), Az.Storage, Az.Automation
              
-Create a runbook to run the script and make sure you choose Powershell runbook type.
+* Create a runbook to run the script and make sure you choose Powershell runbook type.
 
-Add the following login section when connecting from a Runbook        
+* Add the following login section when connecting from a Runbook        
 
 ```
 ##  =========================================================================
@@ -73,7 +70,9 @@ Connect-AzAccount `
 
 ```
 
-Schedule task
+* Schedule task
+
+For a detailed overview of script functionalities, please check [this blogpost](https://techcommunity.microsoft.com/t5/azure-database-support-blog/automate-and-send-alerts-for-elastic-jobs-failures/ba-p/1981457).
 
 Contributions and suggestions are welcomed. 
 
