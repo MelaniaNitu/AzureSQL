@@ -13,9 +13,9 @@ SELECT * FROM jobs.job_executions WHERE lifecycle = 'Failed' ORDER BY start_time
 
 The email functionality can be leveraged through any Simple Mail Transfer Protocol server. The proposed script is using smtp.mail.yahoo.com on port 587. 
 
-# Running automation 
+## Running automation 
 
-## OPTION#1 
+### OPTION#1 
 Run the script on schedule in background on client machine
 
 ```
@@ -41,7 +41,7 @@ Register-ScheduledJob -Name $jobName -FilePath $script -Trigger (New-JobTrigger 
 Unregister-ScheduledJob $jobName
 ```
 
-## OPTION#2
+### OPTION#2
 Run the script from Azure Runbook
 
 * Create a new Automation Account as described [here](https://docs.microsoft.com/en-us/azure/automation/automation-create-standalone-account#create-a-new-automation-account-in-the-azure-portal) and make sure you choose "YES" for option "Create Azure Run As Account".
